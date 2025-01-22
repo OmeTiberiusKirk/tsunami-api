@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:geo="http://www.w3.org/2003/01/geo/" xmlns:tmd="http://www.earthquake.tmd.go.th"
+  version="2.0">
+  <channel>
+    <title>แผ่นดินไหว</title>
+    <link>https://earthquake.tmd.go.th</link>
+    <description>กองเฝ้าระวังแผ่นดินไหว</description>
+    <item>
+      <title>ประเทศเวียดนาม (Vietnam)</title>
+      <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12662</link>
+      <geo:lat>14.882</geo:lat>
+      <geo:long>108.959</geo:long>
+      <tmd:depth>10</tmd:depth>
+      <tmd:magnitude>5.2</tmd:magnitude>
+      <tmd:time>2025-01-08 18:55:44 UTC</tmd:time>
+      <comments>ทางทิศตะวันออกเฉียงใต้ของ อ.เมือง จ.อุบลราชธานี ประมาณ 442 กม. </comments>
+      <pubDate>Thu, 09 Jan 2025 02:08:02 +0700</pubDate>
+      <description>
+<![CDATA[ แผ่นดินไหว ประเทศเวียดนาม <br>2025-01-09 01:55:44 น.<br>Lat. 14.882 , Long. 108.959<br>ขนาด 5.2 <br><br> ]]>
+</description>
+    </item>
+    <item>
+      <title>ประเทศเมียนมา (Myanmar)</title>
+      <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12661</link>
+      <geo:lat>19.831</geo:lat>
+      <geo:long>97.809</geo:long>
+      <tmd:depth>1</tmd:depth>
+      <tmd:magnitude>1.6</tmd:magnitude>
+      <tmd:time>2025-01-07 21:22:10 UTC</tmd:time>
+      <comments>ทางทิศตะวันตกเฉียงเหนือของ อ.ปางมะผ้า จ.แม่ฮ่องสอน ประมาณ 57 กม. </comments>
+      <pubDate>Wed, 08 Jan 2025 06:26:58 +0700</pubDate>
+      <description>
+<![CDATA[ แผ่นดินไหว ประเทศเมียนมา <br>2025-01-08 04:22:10 น.<br>Lat. 19.831 , Long. 97.809<br>ขนาด 1.6 <br><br> ]]>
+</description>
+    </item>
+    <item>
+      <title>ประเทศเมียนมา (Myanmar)</title>
+      <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12660</link>
+      <geo:lat>17.999</geo:lat>
+      <geo:long>96.760</geo:long>
+      <tmd:depth>1</tmd:depth>
+      <tmd:magnitude>2.4</tmd:magnitude>
+      <tmd:time>2025-01-07 18:38:22 UTC</tmd:time>
+      <comments>ทางทิศตะวันตกเฉียงเหนือของ อ.สบเมย จ.แม่ฮ่องสอน ประมาณ 124 กม. </comments>
+      <pubDate>Wed, 08 Jan 2025 01:51:15 +0700</pubDate>
+      <description>
+<![CDATA[ แผ่นดินไหว ประเทศเมียนมา <br>2025-01-08 01:38:22 น.<br>Lat. 17.999 , Long. 96.760<br>ขนาด 2.4 <br><br> ]]>
+</description>
+    </item>
+    <item>
+      <title>พรมแดนประเทศเมียนมา - ประเทศอินเดีย (Myanmar-India Border Region)</title>
+      <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12659</link>
+      <geo:lat>24.459</geo:lat>
+      <geo:long>94.336</geo:long>
+      <tmd:depth>10</tmd:depth>
+      <tmd:magnitude>3.8</tmd:magnitude>
+      <tmd:time>2025-01-06 21:02:28 UTC</tmd:time>
+      <comments>ทางทิศตะวันตกเฉียงเหนือของ อ.ปางมะผ้า จ.แม่ฮ่องสอน ประมาณ 681 กม. </comments>
+      <pubDate>Tue, 07 Jan 2025 04:22:38 +0700</pubDate>
+      <description>
+<![CDATA[ แผ่นดินไหว พรมแดนประเทศเมียนมา - ประเทศอินเดีย <br>2025-01-07 04:02:28 น.<br>Lat. 24.459 , Long. 94.336<br>ขนาด 3.8 <br><br> ]]>
+</description>
+    </item>
+    <item>
+      <title>นอกชายฝั่งตะวันตกทางตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย (Off West Coast of
+        Northern Sumatra, Indonesia)</title>
+      <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12658</link>
+      <geo:lat>3.310</geo:lat>
+      <geo:long>94.582</geo:long>
+      <tmd:depth>10</tmd:depth>
+      <tmd:magnitude>4.3</tmd:magnitude>
+      <tmd:time>2025-01-06 14:59:38 UTC</tmd:time>
+      <comments>ทางทิศตะวันตกเฉียงใต้ของ อ.เมือง จ.ภูเก็ต ประมาณ 661 กม. </comments>
+      <pubDate>Mon, 06 Jan 2025 22:15:40 +0700</pubDate>
+      <description>
+<![CDATA[ แผ่นดินไหว นอกชายฝั่งตะวันตกทางตอนเหนือของหมู่เกาะสุมาตรา ประเทศอินโดนีเซีย <br>2025-01-06 21:59:38 น.<br>Lat. 3.310 , Long. 94.582<br>ขนาด 4.3 <br><br> ]]>
+</description>
+    </item>
+    <item>
+      <title>ประเทศเมียนมา (Myanmar)</title>
+      <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12657</link>
+      <geo:lat>21.072</geo:lat>
+      <geo:long>98.884</geo:long>
+      <tmd:depth>10</tmd:depth>
+      <tmd:magnitude>2.1</tmd:magnitude>
+      <tmd:time>2025-01-05 20:21:26 UTC</tmd:time>
+      <comments>ทางทิศตะวันตกเฉียงเหนือของ อ.แม่สาย จ.เชียงราย ประมาณ 126 กม. </comments>
+      <pubDate>Mon, 06 Jan 2025 04:01:00 +0700</pubDate>
+      <description>
+<![CDATA[ แผ่นดินไหว ประเทศเมียนมา <br>2025-01-06 03:21:26 น.<br>Lat. 21.072 , Long. 98.884<br>ขนาด 2.1 <br><br> ]]>
+</description>
+    </item>
+    <item>
+      <title>ประเทศเมียนมา (Myanmar)</title>
+      <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12656</link>
+      <geo:lat>17.843</geo:lat>
+      <geo:long>97.693</geo:long>
+      <tmd:depth>1</tmd:depth>
+      <tmd:magnitude>2.1</tmd:magnitude>
+      <tmd:time>2025-01-04 02:29:33 UTC</tmd:time>
+      <comments>ทางทิศตะวันตกเฉียงใต้ของ อ.สบเมย จ.แม่ฮ่องสอน ประมาณ 29 กม. </comments>
+      <pubDate>Sat, 04 Jan 2025 09:48:25 +0700</pubDate>
+      <description>
+<![CDATA[ แผ่นดินไหว ประเทศเมียนมา <br>2025-01-04 09:29:33 น.<br>Lat. 17.843 , Long. 97.693<br>ขนาด 2.1 <br><br> ]]>
+</description>
+    </item>
+    <item>
+      <title>ประเทศลาว (Laos)</title>
+      <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12655</link>
+      <geo:lat>19.377</geo:lat>
+      <geo:long>101.330</geo:long>
+      <tmd:depth>5</tmd:depth>
+      <tmd:magnitude>2.3</tmd:magnitude>
+      <tmd:time>2025-01-03 14:42:15 UTC</tmd:time>
+      <comments>ทางทิศตะวันออกเฉียงใต้ของ บ้านน้ำช้าง ต.ขุนน่าน อ.เฉลิมพระเกียรติ จ.น่าน ประมาณ 23
+        กม. </comments>
+      <pubDate>Fri, 03 Jan 2025 22:24:34 +0700</pubDate>
+      <description>
+<![CDATA[ แผ่นดินไหว ประเทศลาว <br>2025-01-03 21:42:15 น.<br>Lat. 19.377 , Long. 101.330<br>ขนาด 2.3 <br><br> ]]>
+</description>
+    </item>
+    <item>
+      <title>ประเทศลาว (Laos)</title>
+      <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12654</link>
+      <geo:lat>19.363</geo:lat>
+      <geo:long>101.338</geo:long>
+      <tmd:depth>4</tmd:depth>
+      <tmd:magnitude>2.4</tmd:magnitude>
+      <tmd:time>2025-01-03 14:37:52 UTC</tmd:time>
+      <comments>ทางทิศตะวันออกเฉียงใต้ของ บ้านน้ำช้าง ต.ขุนน่าน อ.เฉลิมพระเกียรติ จ.น่าน ประมาณ 24
+        กม. </comments>
+      <pubDate>Fri, 03 Jan 2025 22:23:42 +0700</pubDate>
+      <description>
+<![CDATA[ แผ่นดินไหว ประเทศลาว <br>2025-01-03 21:37:52 น.<br>Lat. 19.363 , Long. 101.338<br>ขนาด 2.4 <br><br> ]]>
+</description>
+    </item>
+    <item>
+      <title>ประเทศลาว (Laos)</title>
+      <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12653</link>
+      <geo:lat>19.355</geo:lat>
+      <geo:long>101.326</geo:long>
+      <tmd:depth>5</tmd:depth>
+      <tmd:magnitude>3.0</tmd:magnitude>
+      <tmd:time>2025-01-03 14:36:26 UTC</tmd:time>
+      <comments>ทางทิศตะวันออกเฉียงใต้ของ บ้านน้ำช้าง ต.ขุนน่าน อ.เฉลิมพระเกียรติ จ.น่าน ประมาณ 25
+        กม. </comments>
+      <pubDate>Fri, 03 Jan 2025 21:54:11 +0700</pubDate>
+      <description>
+<![CDATA[ แผ่นดินไหว ประเทศลาว <br>2025-01-03 21:36:26 น.<br>Lat. 19.355 , Long. 101.326<br>ขนาด 3.0 <br><br> ]]>
+</description>
+    </item>
+  </channel>
+</rss>

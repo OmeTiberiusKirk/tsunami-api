@@ -1,0 +1,43 @@
+services:
+  postgres:
+    image: postgres:17.2-alpine
+    container_name: tsunami-postgres
+    restart: always
+    shm_size: 128mb
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - network
+
+  mariadb:
+    image: mariadb:5.5
+    container_name: tsunami-mariadb
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=1q2w3e4r
+      - TZ=Asia/Bangkok
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    networks:
+      - network
+
+  adminer:
+    image: adminer
+    container_name: tsunami-adminer
+    restart: always
+    ports:
+      - 8001:8080
+    networks:
+      - network
+
+volumes:
+  postgres-data:
+    driver: local
+  mariadb-data:
+    driver: local
+networks:
+  network:

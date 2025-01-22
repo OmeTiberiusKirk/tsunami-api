@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss xmlns:geofon="http://geofon.gfz-potsdam.de/ns/geofon" version="2.0">
+  <channel>
+    <title>GFZ Potsdam Earthquake Bulletin - last 20 events</title>
+    <description> Real-time world-wide earthquake locations using seismic stations of the GEOFON and
+      associated partner networks. </description>
+    <link>http://geofon.gfz-potsdam.de/</link>
+    <ttl>2</ttl>
+    <item>
+      <title>M 5.1, Ethiopia</title>
+      <description>2025-01-08 22:17:10 9.25 39.95 10 km A</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025aoms</link>
+      <guid isPermaLink="false">gfz2025aoms</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025aoms/gfz2025aoms.jpg"
+        type="image/jpeg" length="121538" />
+    </item>
+    <item>
+      <title>M 5.0, Ethiopia</title>
+      <description>2025-01-08 22:07:43 9.17 40.07 10 km A</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025aomi</link>
+      <guid isPermaLink="false">gfz2025aomi</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025aomi/gfz2025aomi.jpg"
+        type="image/jpeg" length="120854" />
+    </item>
+    <item>
+      <title>M 5.3, Drake Passage</title>
+      <description>2025-01-08 21:31:28 -59.89 -61.48 10 km A</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025aold</link>
+      <guid isPermaLink="false">gfz2025aold</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025aold/gfz2025aold.jpg"
+        type="image/jpeg" length="112992" />
+    </item>
+    <item>
+      <title>M 4.7, Near Coast of Northern Chile</title>
+      <description>2025-01-08 20:30:18 -23.19 -70.77 10 km A</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025aojc</link>
+      <guid isPermaLink="false">gfz2025aojc</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025aojc/gfz2025aojc.jpg"
+        type="image/jpeg" length="121101" />
+    </item>
+    <item>
+      <title>M 4.8, Kyushu, Japan</title>
+      <description>2025-01-08 14:40:29 30.10 131.07 10 km A</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025anxo</link>
+      <guid isPermaLink="false">gfz2025anxo</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025anxo/gfz2025anxo.jpg"
+        type="image/jpeg" length="114720" />
+    </item>
+    <item>
+      <title>M 5.1, Reykjanes Ridge</title>
+      <description>2025-01-08 14:15:59 53.10 -35.27 10 km A</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025anwu</link>
+      <guid isPermaLink="false">gfz2025anwu</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025anwu/gfz2025anwu.jpg"
+        type="image/jpeg" length="86959" />
+    </item>
+    <item>
+      <title>M 4.7, Near East Coast of Kamchatka</title>
+      <description>2025-01-08 12:45:59 54.69 160.01 133 km C</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025antu</link>
+      <guid isPermaLink="false">gfz2025antu</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025antu/gfz2025antu.jpg"
+        type="image/jpeg" length="99021" />
+    </item>
+    <item>
+      <title>M 5.0, Solomon Islands</title>
+      <description>2025-01-08 12:01:24 -9.04 158.07 10 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025ansi</link>
+      <guid isPermaLink="false">gfz2025ansi</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025ansi/gfz2025ansi.jpg"
+        type="image/jpeg" length="106523" />
+    </item>
+    <item>
+      <title>M 4.4, Sumbawa Region, Indonesia</title>
+      <description>2025-01-08 08:28:37 -8.67 118.33 126 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025anlh</link>
+      <guid isPermaLink="false">gfz2025anlh</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025anlh/gfz2025anlh.jpg"
+        type="image/jpeg" length="104728" />
+    </item>
+    <item>
+      <title>M 4.5, Ethiopia</title>
+      <description>2025-01-08 08:27:39 9.28 40.01 10 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025anlg</link>
+      <guid isPermaLink="false">gfz2025anlg</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025anlg/gfz2025anlg.jpg"
+        type="image/jpeg" length="121479" />
+    </item>
+    <item>
+      <title>M 5.5, Qinghai, China</title>
+      <description>2025-01-08 07:44:23 34.77 97.51 10 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025anjv</link>
+      <guid isPermaLink="false">gfz2025anjv</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025anjv/gfz2025anjv.jpg"
+        type="image/jpeg" length="128449" />
+      <geofon:mt>yes</geofon:mt>
+    </item>
+    <item>
+      <title>M 4.8, Off Coast of Southern Chile</title>
+      <description>2025-01-08 07:23:53 -44.11 -78.14 10 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025anje</link>
+      <guid isPermaLink="false">gfz2025anje</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025anje/gfz2025anje.jpg"
+        type="image/jpeg" length="121353" />
+    </item>
+    <item>
+      <title>M 4.6, Xizang</title>
+      <description>2025-01-08 07:08:54 28.84 87.30 10 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025anir</link>
+      <guid isPermaLink="false">gfz2025anir</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025anir/gfz2025anir.jpg"
+        type="image/jpeg" length="132103" />
+    </item>
+    <item>
+      <title>M 5.0, Xizang</title>
+      <description>2025-01-08 03:51:22 28.39 87.33 10 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025ance</link>
+      <guid isPermaLink="false">gfz2025ance</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025ance/gfz2025ance.jpg"
+        type="image/jpeg" length="131690" />
+    </item>
+    <item>
+      <title>M 4.5, Iceland</title>
+      <description>2025-01-08 03:33:58 64.58 -17.53 10 km A</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025anbp</link>
+      <guid isPermaLink="false">gfz2025anbp</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025anbp/gfz2025anbp.jpg"
+        type="image/jpeg" length="88254" />
+    </item>
+    <item>
+      <title>M 4.6, Xizang</title>
+      <description>2025-01-08 01:43:43 28.38 87.24 10 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025amxy</link>
+      <guid isPermaLink="false">gfz2025amxy</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025amxy/gfz2025amxy.jpg"
+        type="image/jpeg" length="131418" />
+    </item>
+    <item>
+      <title>M 4.4, Türkiye</title>
+      <description>2025-01-08 01:30:05 39.88 41.85 10 km A</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025amxm</link>
+      <guid isPermaLink="false">gfz2025amxm</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025amxm/gfz2025amxm.jpg"
+        type="image/jpeg" length="130768" />
+    </item>
+    <item>
+      <title>M 4.4, New Britain Region, Papua New Guinea</title>
+      <description>2025-01-08 01:08:37 -6.53 149.97 29 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025amwu</link>
+      <guid isPermaLink="false">gfz2025amwu</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025amwu/gfz2025amwu.jpg"
+        type="image/jpeg" length="109404" />
+    </item>
+    <item>
+      <title>M 5.2, Ethiopia</title>
+      <description>2025-01-08 00:53:28 8.87 40.04 10 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025amwg</link>
+      <guid isPermaLink="false">gfz2025amwg</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025amwg/gfz2025amwg.jpg"
+        type="image/jpeg" length="120536" />
+      <geofon:mt>yes</geofon:mt>
+    </item>
+    <item>
+      <title>M 4.9, Ethiopia</title>
+      <description>2025-01-08 00:49:48 9.15 39.97 10 km M</description>
+      <link>http://geofon.gfz-potsdam.de/eqinfo/event.php?from=rss&amp;id=gfz2025amwe</link>
+      <guid isPermaLink="false">gfz2025amwe</guid>
+      <enclosure url="http://geofon.gfz-potsdam.de//data/alerts/2025/gfz2025amwe/gfz2025amwe.jpg"
+        type="image/jpeg" length="121166" />
+    </item>
+  </channel>
+</rss>
