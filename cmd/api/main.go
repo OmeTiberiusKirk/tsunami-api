@@ -2,14 +2,14 @@ package main
 
 import (
 	"net/http"
-	"tsunami/api/internal/route"
+	"tsunami/api/internal/middleware"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	router := gin.Default()
-	router.Use(route.GinMiddleware("http://localhost:3000"))
+	router.Use(middleware.GinMiddleware("http://localhost:3000"))
 	router.GET("/getbulletin", getAlbumByID)
 
 	router.Run("localhost:8080")

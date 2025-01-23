@@ -6,10 +6,10 @@ import (
 	"strconv"
 	"strings"
 	"time"
+	"tsunami/api/internal/database"
 	"tsunami/api/models"
 
 	xj "github.com/basgys/goxml2json"
-	"gorm.io/gorm"
 	"gorm.io/gorm/clause"
 
 	socketio "github.com/googollee/go-socket.io"
@@ -103,7 +103,7 @@ func (p UsgsFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
 }
 
 type FeedTaskArgs struct {
-	DB            *gorm.DB
+	DBC           database.DBController
 	Server        *socketio.Server
 	WithBroadcast bool
 }
@@ -133,14 +133,13 @@ func FeedTask(args FeedTaskArgs) {
 	rs = append(rs, <-usgsC...)
 	FilterEarthquakesByArea(&rs)
 
-	args.DB.Clauses(clause.OnConflict{
+	args.DBC.DB.Clauses(clause.OnConflict{
 		Columns:   []clause.Column{{Name: "uid"}},
 		DoUpdates: clause.AssignmentColumns(columns),
 	}).Create(rs)
 
 	if args.WithBroadcast {
-		b, _ := json.Marshal(rs)
-		args.Server.BroadcastToNamespace("/", "earthquakeData", string(b))
+		args.Server.BroadcastToNamespace("/", "earthquakeData", string(args.DBC.FindAllEearthquakes()))
 	}
 }
 

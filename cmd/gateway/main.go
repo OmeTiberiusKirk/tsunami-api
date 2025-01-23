@@ -1,12 +1,11 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"tsunami/api/internal/database"
-	"tsunami/api/internal/route"
+	"tsunami/api/internal/middleware"
 	"tsunami/api/internal/scraper"
 	"tsunami/api/models"
 
@@ -18,11 +17,11 @@ import (
 
 func main() {
 	router := gin.New()
-	db := database.Open()
-	db.AutoMigrate(&models.Earthquake{})
+	DBC := database.Open()
+	DBC.DB.AutoMigrate(&models.Earthquake{})
 	server := socketio.NewServer(nil)
 
-	scraper.FeedTask(scraper.FeedTaskArgs{DB: db, Server: server})
+	scraper.FeedTask(scraper.FeedTaskArgs{DBC: DBC})
 
 	// create a scheduler
 	s, err := gocron.NewScheduler()
@@ -37,7 +36,7 @@ func main() {
 		),
 		gocron.NewTask(func() {
 			scraper.FeedTask(scraper.FeedTaskArgs{
-				DB:            db,
+				DBC:           DBC,
 				Server:        server,
 				WithBroadcast: true,
 			})
@@ -57,10 +56,7 @@ func main() {
 	})
 
 	server.OnEvent("/", "provoke", func(s socketio.Conn, msg string) {
-		events := &[]models.Earthquake{}
-		db.Model(&models.Earthquake{}).Find(&events)
-		b, _ := json.Marshal(&events)
-		s.Emit("earthquakeData", string(b))
+		s.Emit("earthquakeData", string(DBC.FindAllEearthquakes()))
 	})
 
 	server.OnEvent("/", "bye", func(s socketio.Conn) string {
@@ -85,7 +81,7 @@ func main() {
 	}()
 	defer server.Close()
 
-	router.Use(route.GinMiddleware("http://localhost:3000"))
+	router.Use(middleware.GinMiddleware("http://localhost:3000"))
 	router.GET("/socket.io/*any", gin.WrapH(server))
 	router.POST("/socket.io/*any", gin.WrapH(server))
 	router.StaticFS("/public", http.Dir("./assets"))
