@@ -1,4 +1,4 @@
-package scraper
+package main
 
 type TmdFeedItemPropsType struct {
 	Lat         string

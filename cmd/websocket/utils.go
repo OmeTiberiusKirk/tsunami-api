@@ -1,4 +1,4 @@
-package scraper
+package main
 
 import (
 	"encoding/json"
@@ -103,7 +103,7 @@ func (p UsgsFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
 }
 
 type FeedTaskArgs struct {
-	DBC           database.DBController
+	DBC           database.DBHub
 	Server        *socketio.Server
 	WithBroadcast bool
 }
@@ -127,8 +127,6 @@ func FeedTask(args FeedTaskArgs) {
 	go FetchTmd(tmdC)
 	go FetchGfz(gfzC)
 	go FetchUsgs(usgsC)
-
-	// rs := <-tmdC
 	rs := append(<-tmdC, <-gfzC...)
 	rs = append(rs, <-usgsC...)
 	FilterEarthquakesByArea(&rs)

@@ -12,11 +12,11 @@ import (
 	"gorm.io/gorm"
 )
 
-type DBController struct {
+type DBHub struct {
 	DB *gorm.DB
 }
 
-func Open() DBController {
+func NewDB() *DBHub {
 	godotenv.Load(".env")
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=%s",
@@ -33,14 +33,17 @@ func Open() DBController {
 		panic(err)
 	}
 
-	return DBController{DB: db}
+	db.AutoMigrate(&models.Earthquake{})
+
+	return &DBHub{DB: db}
+
 }
 
-func (dbC DBController) FindAllEearthquakes() []byte {
+func (dbHub DBHub) FindAllEearthquakes() []byte {
 	earthquakes := &[]models.Earthquake{}
 	now := time.Now().UTC()
 	t := now.AddDate(0, 0, -1).Truncate(24 * time.Hour)
-	dbC.DB.Model(&models.Earthquake{}).Where("time > ?", t).Order("time desc").Find(&earthquakes)
+	dbHub.DB.Model(&models.Earthquake{}).Where("time > ?", t).Order("time desc").Find(&earthquakes)
 	b, e := json.Marshal(&earthquakes)
 
 	if e != nil {
