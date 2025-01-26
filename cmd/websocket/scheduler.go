@@ -2,15 +2,15 @@ package main
 
 import (
 	"log"
-	"tsunami/api/internal/database"
+	"tsunami/api/internal/databases"
 	"tsunami/api/models"
 
 	"github.com/go-co-op/gocron/v2"
 	"gorm.io/gorm/clause"
 )
 
-func createScheduler(dbHub *database.DBHub, hub *Hub) {
-	task(dbHub)
+func createScheduler(MainDB *databases.MainDB, hub *Hub) {
+	task(MainDB)
 
 	s, err := gocron.NewScheduler()
 	if err != nil {
@@ -23,8 +23,8 @@ func createScheduler(dbHub *database.DBHub, hub *Hub) {
 			false,
 		),
 		gocron.NewTask(func() {
-			task(dbHub)
-			hub.broadcast <- dbHub.FindAllEearthquakes()
+			task(MainDB)
+			hub.broadcast <- MainDB.FindAllEearthquakes()
 		}),
 	)
 	if err != nil {
@@ -35,7 +35,7 @@ func createScheduler(dbHub *database.DBHub, hub *Hub) {
 	s.Start()
 }
 
-func task(dbHub *database.DBHub) {
+func task(MainDB *databases.MainDB) {
 	columns := []string{
 		"latitude",
 		"longitude",
@@ -62,7 +62,7 @@ func task(dbHub *database.DBHub) {
 
 	FilterEarthquakesByArea(&rs)
 
-	dbHub.DB.Clauses(clause.OnConflict{
+	MainDB.DB.Clauses(clause.OnConflict{
 		Columns:   []clause.Column{{Name: "uid"}},
 		DoUpdates: clause.AssignmentColumns(columns),
 	}).Create(rs)

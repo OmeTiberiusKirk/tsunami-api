@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"tsunami/api/internal/database"
+	"tsunami/api/internal/databases"
 	"tsunami/api/internal/middleware"
 
 	"github.com/gin-gonic/gin"
@@ -16,15 +16,15 @@ func main() {
 	router := gin.Default()
 	router.Use(middleware.GinMiddleware("http://localhost:3000"))
 
-	dbHub := database.NewDB()
+	MainDB := databases.NewMainDB()
 	hub := newHub()
 	go hub.run()
 	// create a scheduler
-	createScheduler(dbHub, hub)
+	createScheduler(MainDB, hub)
 
 	router.GET("/ws", func(c *gin.Context) {
 		serveWs(hub, c.Writer, c.Request)
-		hub.broadcast <- dbHub.FindAllEearthquakes()
+		hub.broadcast <- MainDB.FindAllEearthquakes()
 	})
 
 	router.Run(*addr)

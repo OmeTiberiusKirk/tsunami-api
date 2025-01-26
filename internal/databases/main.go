@@ -1,4 +1,4 @@
-package database
+package databases
 
 import (
 	"encoding/json"
@@ -12,20 +12,20 @@ import (
 	"gorm.io/gorm"
 )
 
-type DBHub struct {
+type MainDB struct {
 	DB *gorm.DB
 }
 
-func NewDB() *DBHub {
+func NewMainDB() *MainDB {
 	godotenv.Load(".env")
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=%s",
-		os.Getenv("DB_HOST"),
-		os.Getenv("DB_USER"),
-		os.Getenv("DB_PASS"),
-		os.Getenv("DB_NAME"),
-		os.Getenv("DB_PORT"),
-		os.Getenv("DB_TIMEZONE"),
+		os.Getenv("PG_DB_HOST"),
+		os.Getenv("PG_DB_USER"),
+		os.Getenv("PG_DB_PASS"),
+		os.Getenv("PG_DB_NAME"),
+		os.Getenv("PG_DB_PORT"),
+		os.Getenv("PG_DB_TIMEZONE"),
 	)
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
@@ -35,15 +35,14 @@ func NewDB() *DBHub {
 
 	db.AutoMigrate(&models.Earthquake{})
 
-	return &DBHub{DB: db}
-
+	return &MainDB{DB: db}
 }
 
-func (dbHub DBHub) FindAllEearthquakes() []byte {
+func (MainDB MainDB) FindAllEearthquakes() []byte {
 	earthquakes := &[]models.Earthquake{}
 	now := time.Now().UTC()
 	t := now.AddDate(0, 0, -1).Truncate(24 * time.Hour)
-	dbHub.DB.Model(&models.Earthquake{}).Where("time > ?", t).Order("time desc").Find(&earthquakes)
+	MainDB.DB.Model(&models.Earthquake{}).Where("time > ?", t).Order("time desc").Find(&earthquakes)
 	b, e := json.Marshal(&earthquakes)
 
 	if e != nil {

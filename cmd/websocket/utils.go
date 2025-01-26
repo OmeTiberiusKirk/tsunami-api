@@ -6,7 +6,7 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"tsunami/api/internal/database"
+	"tsunami/api/internal/databases"
 	"tsunami/api/models"
 
 	xj "github.com/basgys/goxml2json"
@@ -103,7 +103,7 @@ func (p UsgsFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
 }
 
 type FeedTaskArgs struct {
-	DBC           database.DBHub
+	DBC           databases.MainDB
 	Server        *socketio.Server
 	WithBroadcast bool
 }
