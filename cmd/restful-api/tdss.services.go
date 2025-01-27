@@ -59,6 +59,8 @@ func (s TdssServices) GetSimResult(mag float64, depth float64, lat float64, long
 	).Order("depth, magnitude, R").Take(&result)
 
 	if len(result) != 0 {
+		fmt.Println("result")
+		fmt.Println(result[0].Id)
 		return result[0].Id
 	}
 
