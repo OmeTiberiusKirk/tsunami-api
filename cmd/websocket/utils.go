@@ -6,8 +6,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"tsunami/api/internal/databases"
-	"tsunami/api/models"
+	"tsunami-api/internal/databases"
+	"tsunami-api/models"
 
 	xj "github.com/basgys/goxml2json"
 	"gorm.io/gorm/clause"

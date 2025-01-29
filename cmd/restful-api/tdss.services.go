@@ -15,7 +15,7 @@ type TdssServices struct {
 }
 
 func NewTdssServices() TdssServices {
-	godotenv.Load(".env")
+	godotenv.Load("../../.env")
 	dsn := fmt.Sprintf(
 		"%v:%v@tcp(127.0.0.1:3306)/%v?charset=utf8mb4&parseTime=True&loc=Local",
 		os.Getenv("MR_DB_USER"),

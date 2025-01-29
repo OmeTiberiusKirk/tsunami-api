@@ -2,15 +2,15 @@ package main
 
 import (
 	"log"
-	"tsunami/api/internal/databases"
-	"tsunami/api/models"
+	"tsunami-api/internal/databases"
+	"tsunami-api/models"
 
 	"github.com/go-co-op/gocron/v2"
 	"gorm.io/gorm/clause"
 )
 
-func createScheduler(MainDB *databases.MainDB, hub *Hub) {
-	task(MainDB)
+func CreateScheduler(MainDB *databases.MainDB, hub *Hub) {
+	Task(MainDB)
 
 	s, err := gocron.NewScheduler()
 	if err != nil {
@@ -23,7 +23,7 @@ func createScheduler(MainDB *databases.MainDB, hub *Hub) {
 			false,
 		),
 		gocron.NewTask(func() {
-			task(MainDB)
+			Task(MainDB)
 			hub.broadcast <- MainDB.FindAllEearthquakes()
 		}),
 	)
@@ -31,11 +31,10 @@ func createScheduler(MainDB *databases.MainDB, hub *Hub) {
 		log.Fatal(err)
 	}
 
-	// start the scheduler
 	s.Start()
 }
 
-func task(MainDB *databases.MainDB) {
+func Task(MainDB *databases.MainDB) {
 	columns := []string{
 		"latitude",
 		"longitude",
@@ -62,8 +61,11 @@ func task(MainDB *databases.MainDB) {
 
 	FilterEarthquakesByArea(&rs)
 
-	MainDB.DB.Clauses(clause.OnConflict{
-		Columns:   []clause.Column{{Name: "uid"}},
-		DoUpdates: clause.AssignmentColumns(columns),
-	}).Create(rs)
+	if len(rs) != 0 {
+		MainDB.DB.Clauses(clause.OnConflict{
+			Columns:   []clause.Column{{Name: "uid"}},
+			DoUpdates: clause.AssignmentColumns(columns),
+		}).Create(rs)
+	}
+
 }

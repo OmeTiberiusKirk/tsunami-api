@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"tsunami/api/models"
+	"tsunami-api/models"
 
 	"github.com/go-zoox/fetch"
 )

@@ -1,4 +1,4 @@
-module tsunami/api
+module tsunami-api
 
 go 1.23.2
 

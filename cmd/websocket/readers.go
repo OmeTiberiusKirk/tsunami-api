@@ -3,7 +3,7 @@ package main
 import (
 	"encoding/json"
 	"os"
-	"tsunami/api/models"
+	"tsunami-api/models"
 )
 
 func ReadTmd(c chan []models.Earthquake) {

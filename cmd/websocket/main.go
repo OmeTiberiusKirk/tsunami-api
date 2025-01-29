@@ -2,8 +2,8 @@ package main
 
 import (
 	"flag"
-	"tsunami/api/internal/databases"
-	"tsunami/api/internal/middleware"
+	"tsunami-api/internal/databases"
+	"tsunami-api/internal/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -19,8 +19,7 @@ func main() {
 	MainDB := databases.NewMainDB()
 	hub := newHub()
 	go hub.run()
-	// create a scheduler
-	createScheduler(MainDB, hub)
+	CreateScheduler(MainDB, hub)
 
 	router.GET("/ws", func(c *gin.Context) {
 		serveWs(hub, c.Writer, c.Request)

@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"os"
 	"time"
-	"tsunami/api/models"
+	"tsunami-api/models"
 
 	"github.com/joho/godotenv"
 	"gorm.io/driver/postgres"
@@ -17,7 +17,7 @@ type MainDB struct {
 }
 
 func NewMainDB() *MainDB {
-	godotenv.Load(".env")
+	godotenv.Load("../../.env")
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=%s",
 		os.Getenv("PG_DB_HOST"),

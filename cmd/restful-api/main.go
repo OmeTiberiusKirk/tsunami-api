@@ -1,7 +1,7 @@
 package main
 
 import (
-	"tsunami/api/internal/middleware"
+	"tsunami-api/internal/middleware"
 
 	"github.com/gin-gonic/gin"
 )
