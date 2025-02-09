@@ -36,6 +36,18 @@ services:
     networks:
       - network
 
+  # api:
+  #   image: go
+  #   build: 
+  #     dockerfile: ./Dockerfile.dev
+  #   container_name: tsunami-api
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+  #     - 8081:8081
+  #   networks:
+  #     - network
+
 volumes:
   postgres-data:
     driver: local
