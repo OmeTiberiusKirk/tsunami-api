@@ -1,4 +1,4 @@
-package main
+package websocket
 
 import (
 	"log"
@@ -6,7 +6,66 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
+	"gorm.io/gorm"
 )
+
+type WebSocketIntf interface{}
+
+// Hub maintains the set of active clients and broadcasts messages to the
+// clients.
+type WebSocket struct {
+	// Registered clients.
+	clients map[*Client]bool
+	// Inbound messages from the clients.
+	broadcast chan []byte
+	// Register requests from the clients.
+	register chan *Client
+	// Unregister requests from clients.
+	unregister chan *Client
+	DB         *gorm.DB
+}
+
+type Client struct {
+	hub *WebSocket
+	// The websocket connection.
+	conn *websocket.Conn
+	// Buffered channel of outbound messages.
+	send chan []byte
+}
+
+func New(db *gorm.DB) (ws *WebSocket) {
+	ws = &WebSocket{
+		DB:         db,
+		broadcast:  make(chan []byte),
+		register:   make(chan *Client),
+		unregister: make(chan *Client),
+		clients:    make(map[*Client]bool),
+	}
+	return
+}
+
+func (h *WebSocket) Run() {
+	for {
+		select {
+		case client := <-h.register:
+			h.clients[client] = true
+		case client := <-h.unregister:
+			if _, ok := h.clients[client]; ok {
+				delete(h.clients, client)
+				close(client.send)
+			}
+		case message := <-h.broadcast:
+			for client := range h.clients {
+				select {
+				case client.send <- message:
+				default:
+					close(client.send)
+					delete(h.clients, client)
+				}
+			}
+		}
+	}
+}
 
 const (
 	// Time allowed to write a message to the peer.
@@ -30,16 +89,6 @@ var (
 var upgrader = websocket.Upgrader{
 	ReadBufferSize:  1024,
 	WriteBufferSize: 1024,
-}
-
-type Client struct {
-	hub *Hub
-
-	// The websocket connection.
-	conn *websocket.Conn
-
-	// Buffered channel of outbound messages.
-	send chan []byte
 }
 
 // readPump pumps messages from the websocket connection to the hub.
@@ -73,7 +122,7 @@ type Client struct {
 // A goroutine running writePump is started for each connection. The
 // application ensures that there is at most one writer to a connection by
 // executing all writes from this goroutine.
-func (c *Client) writePump() {
+func (c *Client) WritePump() {
 	ticker := time.NewTicker(pingPeriod)
 	defer func() {
 		ticker.Stop()
@@ -115,16 +164,20 @@ func (c *Client) writePump() {
 }
 
 // serveWs handles websocket requests from the peer.
-func serveWs(hub *Hub, w http.ResponseWriter, r *http.Request) {
+func (ws *WebSocket) ServeWs(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
 		return
 	}
-	client := &Client{hub: hub, conn: conn, send: make(chan []byte, 256)}
+	client := &Client{hub: ws, conn: conn, send: make(chan []byte, 256)}
 	client.hub.register <- client
 
 	// Allow collection of memory referenced by the caller by doing all work in
 	// new goroutines.
-	go client.writePump()
+	go client.WritePump()
+}
+
+func (ws *WebSocket) SetBroadcast(message []byte) {
+	ws.broadcast <- message
 }

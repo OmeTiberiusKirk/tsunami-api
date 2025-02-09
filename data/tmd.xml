@@ -8,10 +8,10 @@
     <item>
       <title>ประเทศเวียดนาม (Vietnam)</title>
       <link>https://earthquake.tmd.go.th/inside-info.html?earthquake=12662</link>
-      <geo:lat>14.882</geo:lat>
-      <geo:long>108.959</geo:long>
+      <geo:lat>9.111469049862515</geo:lat>
+      <geo:long>96.3588478647885</geo:long>
       <tmd:depth>10</tmd:depth>
-      <tmd:magnitude>5.2</tmd:magnitude>
+      <tmd:magnitude>9.2</tmd:magnitude>
       <tmd:time>2025-01-08 18:55:44 UTC</tmd:time>
       <comments>ทางทิศตะวันออกเฉียงใต้ของ อ.เมือง จ.อุบลราชธานี ประมาณ 442 กม. </comments>
       <pubDate>Thu, 09 Jan 2025 02:08:02 +0700</pubDate>
@@ -25,7 +25,7 @@
       <geo:lat>19.831</geo:lat>
       <geo:long>97.809</geo:long>
       <tmd:depth>1</tmd:depth>
-      <tmd:magnitude>1.6</tmd:magnitude>
+      <tmd:magnitude>9.6</tmd:magnitude>
       <tmd:time>2025-01-07 21:22:10 UTC</tmd:time>
       <comments>ทางทิศตะวันตกเฉียงเหนือของ อ.ปางมะผ้า จ.แม่ฮ่องสอน ประมาณ 57 กม. </comments>
       <pubDate>Wed, 08 Jan 2025 06:26:58 +0700</pubDate>

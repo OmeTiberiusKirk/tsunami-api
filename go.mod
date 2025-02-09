@@ -1,4 +1,4 @@
-module tsunami-api
+module tsunamiApi
 
 go 1.23.2
 
@@ -10,6 +10,7 @@ require (
 	github.com/googollee/go-socket.io v1.7.0
 	github.com/gorilla/websocket v1.4.2
 	github.com/joho/godotenv v1.5.1
+	github.com/paulmach/orb v0.11.1
 	gorm.io/driver/postgres v1.5.11
 	gorm.io/gorm v1.25.12
 )

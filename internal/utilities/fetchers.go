@@ -1,8 +1,8 @@
-package main
+package utilities
 
 import (
 	"encoding/json"
-	"tsunami-api/models"
+	"tsunamiApi/models"
 
 	"github.com/go-zoox/fetch"
 )

@@ -1,36 +1,26 @@
-package main
+package tdss
 
 import (
 	"fmt"
-	"os"
 	"strings"
-
-	"github.com/joho/godotenv"
-	"gorm.io/driver/mysql"
-	"gorm.io/gorm"
 )
 
-type TdssServices struct {
-	DB *gorm.DB
+type ServicesIntf interface {
+	GetSimResult(
+		mag float64,
+		depth float64,
+		lat float64,
+		long float64,
+	) int
+	FindObservationPoints(simId int) []map[string]interface{}
 }
 
-func NewTdssServices() TdssServices {
-	godotenv.Load("../../.env")
-	dsn := fmt.Sprintf(
-		"%v:%v@tcp(127.0.0.1:3306)/%v?charset=utf8mb4&parseTime=True&loc=Local",
-		os.Getenv("MR_DB_USER"),
-		os.Getenv("MR_DB_PASS"),
-		os.Getenv("MR_DB_NAME"),
-	)
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		panic(err)
-	}
-
-	return TdssServices{DB: db}
+func (tdss *Tdss) Services() (s ServicesIntf) {
+	s = tdss
+	return
 }
 
-func (s TdssServices) GetSimResult(mag float64, depth float64, lat float64, long float64) int {
+func (tdss *Tdss) GetSimResult(mag float64, depth float64, lat float64, long float64) int {
 	var (
 		result []struct {
 			Id int
@@ -44,7 +34,7 @@ func (s TdssServices) GetSimResult(mag float64, depth float64, lat float64, long
 		d = 30
 	}
 
-	s.DB.Table("sim_result").Select(
+	tdss.DB.Table("sim_result").Select(
 		"id",
 		"job_profile_id",
 		"name",
@@ -67,7 +57,7 @@ func (s TdssServices) GetSimResult(mag float64, depth float64, lat float64, long
 	return 0
 }
 
-func (s TdssServices) FindObservationPoints(simId int) []map[string]interface{} {
+func (tdss *Tdss) FindObservationPoints(simId int) []map[string]interface{} {
 	var result []map[string]interface{}
 	sql := []string{
 		"SELECT",
@@ -92,6 +82,6 @@ func (s TdssServices) FindObservationPoints(simId int) []map[string]interface{} 
 		"AND `sim_point_val`.`type` = 'ETA'",
 	}
 
-	s.DB.Raw(strings.Join(sql, " ")).Scan(&result)
+	tdss.DB.Raw(strings.Join(sql, " ")).Scan(&result)
 	return result
 }

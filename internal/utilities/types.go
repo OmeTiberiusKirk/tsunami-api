@@ -1,4 +1,4 @@
-package main
+package utilities
 
 type TmdFeedItemPropsType struct {
 	Lat         string

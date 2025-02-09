@@ -1,9 +1,9 @@
-package main
+package utilities
 
 import (
 	"encoding/json"
 	"os"
-	"tsunami-api/models"
+	"tsunamiApi/models"
 )
 
 func ReadTmd(c chan []models.Earthquake) {

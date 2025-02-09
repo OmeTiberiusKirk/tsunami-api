@@ -1,4 +1,4 @@
-package main
+package utilities
 
 import (
 	"encoding/json"
@@ -6,13 +6,9 @@ import (
 	"strconv"
 	"strings"
 	"time"
-	"tsunami-api/internal/databases"
-	"tsunami-api/models"
+	"tsunamiApi/models"
 
 	xj "github.com/basgys/goxml2json"
-	"gorm.io/gorm/clause"
-
-	socketio "github.com/googollee/go-socket.io"
 )
 
 func ConvertXmlToJson[Item comparable](d string) ([]Item, error) {
@@ -99,45 +95,6 @@ func (p UsgsFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
 		Title:        title,
 		Description:  desc,
 		FeedProvider: "usgs",
-	}
-}
-
-type FeedTaskArgs struct {
-	DBC           databases.MainDB
-	Server        *socketio.Server
-	WithBroadcast bool
-}
-
-func FeedTask(args FeedTaskArgs) {
-	columns := []string{
-		"latitude",
-		"longitude",
-		"magnitude",
-		"depth",
-		"time",
-		"title",
-		"description",
-		"feed_provider",
-	}
-
-	tmdC := make(chan []models.Earthquake)
-	gfzC := make(chan []models.Earthquake)
-	usgsC := make(chan []models.Earthquake)
-
-	go FetchTmd(tmdC)
-	go FetchGfz(gfzC)
-	go FetchUsgs(usgsC)
-	rs := append(<-tmdC, <-gfzC...)
-	rs = append(rs, <-usgsC...)
-	FilterEarthquakesByArea(&rs)
-
-	args.DBC.DB.Clauses(clause.OnConflict{
-		Columns:   []clause.Column{{Name: "uid"}},
-		DoUpdates: clause.AssignmentColumns(columns),
-	}).Create(rs)
-
-	if args.WithBroadcast {
-		args.Server.BroadcastToNamespace("/", "earthquakeData", string(args.DBC.FindAllEearthquakes()))
 	}
 }
 

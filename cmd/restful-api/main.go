@@ -1,18 +1,20 @@
 package main
 
 import (
-	"tsunami-api/internal/middleware"
+	"tsunamiApi/internal/databases"
+	"tsunamiApi/internal/middleware"
+	"tsunamiApi/internal/tdss"
 
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
-	controller := NewTdssController()
-
+	db := databases.ConnectMRDB()
+	tdss := tdss.NewTdss(db)
 	router := gin.Default()
+
 	router.Use(middleware.GinMiddleware("http://localhost:3000"))
-	router.GET("/getbulletin", controller.FindObservationPoints)
+	router.GET("/getbulletin", tdss.Controllers().ServObservationPoints)
 
 	router.Run("localhost:8080")
-
 }

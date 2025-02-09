@@ -1,23 +1,18 @@
 package databases
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
-	"time"
-	"tsunami-api/models"
+	models "tsunamiApi/models"
 
 	"github.com/joho/godotenv"
+	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
-type MainDB struct {
-	DB *gorm.DB
-}
-
-func NewMainDB() *MainDB {
-	godotenv.Load("../../.env")
+func ConnectPGDB() *gorm.DB {
+	godotenv.Load(".env")
 	dsn := fmt.Sprintf(
 		"host=%s user=%s password=%s dbname=%s port=%s sslmode=disable TimeZone=%s",
 		os.Getenv("PG_DB_HOST"),
@@ -32,22 +27,23 @@ func NewMainDB() *MainDB {
 	if err != nil {
 		panic(err)
 	}
-
 	db.AutoMigrate(&models.Earthquake{})
 
-	return &MainDB{DB: db}
+	return db
 }
 
-func (MainDB MainDB) FindAllEearthquakes() []byte {
-	earthquakes := &[]models.Earthquake{}
-	now := time.Now().UTC()
-	t := now.AddDate(0, 0, -1).Truncate(24 * time.Hour)
-	MainDB.DB.Model(&models.Earthquake{}).Where("time > ?", t).Order("time desc").Find(&earthquakes)
-	b, e := json.Marshal(&earthquakes)
-
-	if e != nil {
-		return []byte{}
+func ConnectMRDB() *gorm.DB {
+	godotenv.Load(".env")
+	dsn := fmt.Sprintf(
+		"%v:%v@tcp(127.0.0.1:3306)/%v?charset=utf8mb4&parseTime=True&loc=Local",
+		os.Getenv("MR_DB_USER"),
+		os.Getenv("MR_DB_PASS"),
+		os.Getenv("MR_DB_NAME"),
+	)
+	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
+	if err != nil {
+		panic(err)
 	}
 
-	return b
+	return db
 }
