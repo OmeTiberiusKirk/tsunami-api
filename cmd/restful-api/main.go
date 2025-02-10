@@ -16,5 +16,5 @@ func main() {
 	router.Use(middleware.GinMiddleware("http://localhost:3000"))
 	router.GET("/getbulletin", tdss.Controllers().ServObservationPoints)
 
-	router.Run("localhost:8080")
+	router.Run()
 }

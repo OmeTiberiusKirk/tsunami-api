@@ -1,0 +1,28 @@
+services:
+  api:
+    depends_on:
+      - ws
+    build:
+      context: .
+      dockerfile: ./api.Dockerfile
+    container_name: tsunami-api
+    restart: always
+    ports:
+      - 8080:8080
+    networks:
+      - network
+  ws:
+    depends_on:
+      mariadb:
+        condition: service_healthy
+      postgres:
+        condition: service_started
+    build:
+      context: .
+      dockerfile: ./ws.Dockerfile
+    container_name: tsunami-ws
+    restart: always
+    ports:
+      - 8081:8081
+    networks:
+      - network

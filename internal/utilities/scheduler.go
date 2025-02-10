@@ -9,6 +9,7 @@ import (
 	"tsunamiApi/models"
 
 	"github.com/go-co-op/gocron/v2"
+	"github.com/joho/godotenv"
 	"github.com/paulmach/orb"
 	"gorm.io/gorm/clause"
 )
@@ -42,6 +43,7 @@ func CreateScheduler(
 }
 
 func Task(eq earthquake.EarthquakeIntf) {
+	godotenv.Load(".env")
 	isDev, _ := strconv.ParseBool(os.Getenv("DEV"))
 	columns := []string{
 		"latitude",

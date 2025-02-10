@@ -12,7 +12,6 @@ services:
       - postgres-data:/var/lib/postgresql/data
     networks:
       - network
-
   mariadb:
     image: mariadb:5.5
     container_name: tsunami-mariadb
@@ -26,7 +25,10 @@ services:
       - mariadb-data:/var/lib/mysql
     networks:
       - network
-
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
   adminer:
     image: adminer
     container_name: tsunami-adminer
@@ -34,20 +36,7 @@ services:
     ports:
       - 8001:8080
     networks:
-      - network
-
-  # api:
-  #   image: go
-  #   build: 
-  #     dockerfile: ./Dockerfile.dev
-  #   container_name: tsunami-api
-  #   restart: always
-  #   ports:
-  #     - 8080:8080
-  #     - 8081:8081
-  #   networks:
-  #     - network
-
+      - network 
 volumes:
   postgres-data:
     driver: local

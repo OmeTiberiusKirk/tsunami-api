@@ -7,6 +7,7 @@ import (
 	"time"
 	"tsunamiApi/models"
 
+	"github.com/joho/godotenv"
 	"github.com/paulmach/orb"
 	"gorm.io/gorm"
 )
@@ -23,8 +24,10 @@ func (eq *Earthquake) Services() (ser ServicesIntf) {
 }
 
 func (eq *Earthquake) GetRecentEarthquakes() []byte {
-	earthquakes := &[]models.Earthquake{}
+	godotenv.Load(".env")
 	isDev, _ := strconv.ParseBool(os.Getenv("DEV"))
+	earthquakes := &[]models.Earthquake{}
+
 	if isDev {
 		eq.DB.Model(&models.Earthquake{}).Order("time desc").Find(&earthquakes)
 	} else {
