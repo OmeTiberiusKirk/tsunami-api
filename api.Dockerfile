@@ -9,6 +9,6 @@ RUN go mod download && go mod verify
 COPY . .
 RUN go build -v -o /usr/local/bin/restful-api ./cmd/restful-api/main.go
 
-EXPOSE 8080/tcp
+EXPOSE 80/tcp
 
 CMD ["restful-api"]
