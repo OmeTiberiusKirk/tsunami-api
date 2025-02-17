@@ -3,24 +3,15 @@ package tdss
 import (
 	"fmt"
 	"strings"
+	"tsunamiApi/internal/databases"
 )
 
-type ServicesIntf interface {
-	GetSimResult(
-		mag float64,
-		depth float64,
-		lat float64,
-		long float64,
-	) int
-	FindObservationPoints(simId int) []map[string]interface{}
-}
-
-func (tdss *Tdss) Services() (s ServicesIntf) {
-	s = tdss
-	return
-}
-
-func (tdss *Tdss) GetSimResult(mag float64, depth float64, lat float64, long float64) int {
+func GetSimResult(
+	mag float64,
+	depth float64,
+	lat float64,
+	long float64,
+) int {
 	var (
 		result []struct {
 			Id int
@@ -34,7 +25,7 @@ func (tdss *Tdss) GetSimResult(mag float64, depth float64, lat float64, long flo
 		d = 30
 	}
 
-	tdss.DB.Table("sim_result").Select(
+	databases.MRDB.Table("sim_result").Select(
 		"id",
 		"job_profile_id",
 		"name",
@@ -57,7 +48,7 @@ func (tdss *Tdss) GetSimResult(mag float64, depth float64, lat float64, long flo
 	return 0
 }
 
-func (tdss *Tdss) FindObservationPoints(simId int) []map[string]interface{} {
+func FindObservationPoints(simId int) []map[string]interface{} {
 	var result []map[string]interface{}
 	sql := []string{
 		"SELECT",
@@ -82,6 +73,6 @@ func (tdss *Tdss) FindObservationPoints(simId int) []map[string]interface{} {
 		"AND `sim_point_val`.`type` = 'ETA'",
 	}
 
-	tdss.DB.Raw(strings.Join(sql, " ")).Scan(&result)
+	databases.MRDB.Raw(strings.Join(sql, " ")).Scan(&result)
 	return result
 }

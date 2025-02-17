@@ -7,7 +7,6 @@ require (
 	github.com/gin-gonic/gin v1.10.0
 	github.com/go-co-op/gocron/v2 v2.14.2
 	github.com/go-zoox/fetch v1.8.3
-	github.com/googollee/go-socket.io v1.7.0
 	github.com/gorilla/websocket v1.4.2
 	github.com/joho/godotenv v1.5.1
 	github.com/paulmach/orb v0.11.1
@@ -31,8 +30,6 @@ require (
 	github.com/go-zoox/core-utils v1.2.11 // indirect
 	github.com/go-zoox/headers v1.0.6 // indirect
 	github.com/goccy/go-json v0.10.2 // indirect
-	github.com/gofrs/uuid v4.0.0+incompatible // indirect
-	github.com/gomodule/redigo v1.8.4 // indirect
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/jackc/pgpassfile v1.0.0 // indirect
 	github.com/jackc/pgservicefile v0.0.0-20221227161230-091c0ba34f0a // indirect

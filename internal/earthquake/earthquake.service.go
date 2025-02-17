@@ -5,35 +5,24 @@ import (
 	"os"
 	"strconv"
 	"time"
+	"tsunamiApi/internal/databases"
 	"tsunamiApi/models"
 
 	"github.com/joho/godotenv"
 	"github.com/paulmach/orb"
-	"gorm.io/gorm"
 )
 
-type ServicesIntf interface {
-	GetRecentEarthquakes() []byte
-	GetGeometryOfAndaman() orb.MultiPoint
-	GetDB() *gorm.DB
-}
-
-func (eq *Earthquake) Services() (ser ServicesIntf) {
-	ser = eq
-	return
-}
-
-func (eq *Earthquake) GetRecentEarthquakes() []byte {
+func GetRecentEarthquakes() []byte {
 	godotenv.Load(".env")
 	isDev, _ := strconv.ParseBool(os.Getenv("DEV"))
 	earthquakes := &[]models.Earthquake{}
 
 	if isDev {
-		eq.DB.Model(&models.Earthquake{}).Order("time desc").Find(&earthquakes)
+		databases.PGDB.Model(&models.Earthquake{}).Order("time desc").Find(&earthquakes)
 	} else {
 		now := time.Now().UTC()
 		t := now.AddDate(0, 0, -1).Truncate(24 * time.Hour)
-		eq.DB.Model(&models.Earthquake{}).Where("time > ?", t).Order("time desc").Find(&earthquakes)
+		databases.PGDB.Model(&models.Earthquake{}).Where("time > ?", t).Order("time desc").Find(&earthquakes)
 	}
 
 	b, e := json.Marshal(&earthquakes)
@@ -44,7 +33,7 @@ func (eq *Earthquake) GetRecentEarthquakes() []byte {
 	return b
 }
 
-func (eq *Earthquake) GetGeometryOfAndaman() orb.MultiPoint {
+func GetGeometryOfAndaman() orb.MultiPoint {
 	b, err := os.ReadFile("data/tsunami.geojson")
 	if err != nil {
 		panic(err)
@@ -56,8 +45,4 @@ func (eq *Earthquake) GetGeometryOfAndaman() orb.MultiPoint {
 	}
 
 	return j["coordinates"]
-}
-
-func (eq *Earthquake) GetDB() *gorm.DB {
-	return eq.DB
 }

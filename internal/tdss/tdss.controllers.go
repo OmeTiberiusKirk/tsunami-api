@@ -6,16 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type ControllersIntf interface {
-	ServObservationPoints(ctx *gin.Context)
-}
-
-func (tdss *Tdss) Controllers() (intf ControllersIntf) {
-	intf = tdss
-	return
-}
-
-func (tdss *Tdss) ServObservationPoints(ctx *gin.Context) {
+func ServObservationPoints(ctx *gin.Context) {
 	var (
 		query struct {
 			Latitude  float64 `form:"latitude"`
@@ -30,7 +21,7 @@ func (tdss *Tdss) ServObservationPoints(ctx *gin.Context) {
 		"results": map[string]interface{}{
 			"eta_results": []interface{}{},
 		}}
-	simId := tdss.GetSimResult(
+	simId := GetSimResult(
 		query.Magnitude,
 		query.Depth,
 		query.Latitude,
@@ -38,7 +29,7 @@ func (tdss *Tdss) ServObservationPoints(ctx *gin.Context) {
 	)
 	if simId != 0 {
 		result["results"] = map[string]interface{}{
-			"eta_results": tdss.FindObservationPoints(simId),
+			"eta_results": FindObservationPoints(simId),
 		}
 	}
 

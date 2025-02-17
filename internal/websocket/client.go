@@ -6,65 +6,14 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"gorm.io/gorm"
 )
 
-type WebSocketIntf interface{}
-
-// Hub maintains the set of active clients and broadcasts messages to the
-// clients.
-type WebSocket struct {
-	// Registered clients.
-	clients map[*Client]bool
-	// Inbound messages from the clients.
-	broadcast chan []byte
-	// Register requests from the clients.
-	register chan *Client
-	// Unregister requests from clients.
-	unregister chan *Client
-	DB         *gorm.DB
-}
-
 type Client struct {
-	hub *WebSocket
+	hub *Hub
 	// The websocket connection.
 	conn *websocket.Conn
 	// Buffered channel of outbound messages.
 	send chan []byte
-}
-
-func New(db *gorm.DB) (ws *WebSocket) {
-	ws = &WebSocket{
-		DB:         db,
-		broadcast:  make(chan []byte),
-		register:   make(chan *Client),
-		unregister: make(chan *Client),
-		clients:    make(map[*Client]bool),
-	}
-	return
-}
-
-func (h *WebSocket) Run() {
-	for {
-		select {
-		case client := <-h.register:
-			h.clients[client] = true
-		case client := <-h.unregister:
-			if _, ok := h.clients[client]; ok {
-				delete(h.clients, client)
-				close(client.send)
-			}
-		case message := <-h.broadcast:
-			for client := range h.clients {
-				select {
-				case client.send <- message:
-				default:
-					close(client.send)
-					delete(h.clients, client)
-				}
-			}
-		}
-	}
 }
 
 const (
@@ -164,7 +113,7 @@ func (c *Client) WritePump() {
 }
 
 // serveWs handles websocket requests from the peer.
-func (ws *WebSocket) ServeWs(w http.ResponseWriter, r *http.Request) {
+func (ws *Hub) ServeWs(w http.ResponseWriter, r *http.Request) {
 	conn, err := upgrader.Upgrade(w, r, nil)
 	if err != nil {
 		log.Println(err)
@@ -176,8 +125,4 @@ func (ws *WebSocket) ServeWs(w http.ResponseWriter, r *http.Request) {
 	// Allow collection of memory referenced by the caller by doing all work in
 	// new goroutines.
 	go client.WritePump()
-}
-
-func (ws *WebSocket) SetBroadcast(message []byte) {
-	ws.broadcast <- message
 }

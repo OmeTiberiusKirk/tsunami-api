@@ -4,6 +4,7 @@ import (
 	"log"
 	"os"
 	"strconv"
+	"tsunamiApi/internal/databases"
 	"tsunamiApi/internal/earthquake"
 	"tsunamiApi/internal/websocket"
 	"tsunamiApi/models"
@@ -15,10 +16,9 @@ import (
 )
 
 func CreateScheduler(
-	eq earthquake.EarthquakeIntf,
-	ws *websocket.WebSocket,
+	ws *websocket.Hub,
 ) {
-	Task(eq)
+	Task()
 
 	s, err := gocron.NewScheduler()
 	if err != nil {
@@ -31,8 +31,8 @@ func CreateScheduler(
 			false,
 		),
 		gocron.NewTask(func() {
-			Task(eq)
-			ws.SetBroadcast(eq.Services().GetRecentEarthquakes())
+			Task()
+			ws.SetBroadcast(earthquake.GetRecentEarthquakes())
 		}),
 	)
 	if err != nil {
@@ -42,7 +42,7 @@ func CreateScheduler(
 	s.Start()
 }
 
-func Task(eq earthquake.EarthquakeIntf) {
+func Task() {
 	godotenv.Load(".env")
 	isDev, _ := strconv.ParseBool(os.Getenv("DEV"))
 	columns := []string{
@@ -76,7 +76,7 @@ func Task(eq earthquake.EarthquakeIntf) {
 	close(gfz)
 	close(usgs)
 
-	coordinates := eq.Services().GetGeometryOfAndaman()
+	coordinates := earthquake.GetGeometryOfAndaman()
 	rs = Filter(rs, func(item models.Earthquake, idx int) bool {
 		p := orb.Point{item.Longitude, item.Latitude}
 		bound := coordinates.Bound()
@@ -84,7 +84,7 @@ func Task(eq earthquake.EarthquakeIntf) {
 	})
 
 	if len(rs) != 0 {
-		eq.Services().GetDB().Clauses(clause.OnConflict{
+		databases.PGDB.Clauses(clause.OnConflict{
 			Columns:   []clause.Column{{Name: "uid"}},
 			DoUpdates: clause.AssignmentColumns(columns),
 		}).Create(rs)
