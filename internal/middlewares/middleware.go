@@ -1,6 +1,7 @@
-package middleware
+package middlewares
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -13,7 +14,7 @@ func GinMiddleware(allowOrigin string) gin.HandlerFunc {
 		c.Writer.Header().Set("Access-Control-Allow-Methods", "POST, OPTIONS, GET, PUT, DELETE")
 		c.Writer.Header().Set(
 			"Access-Control-Allow-Headers",
-			`Accept,Authorization, Content-Type, Content-Length,
+			`Accept, Authorization, Content-Type, Content-Length,
 			X-CSRF-Token, Token, session, Origin, Host, Connection,
 			Accept-Encoding, Accept-Language, X-Requested-With`,
 		)
@@ -27,4 +28,8 @@ func GinMiddleware(allowOrigin string) gin.HandlerFunc {
 		c.Request.Header.Del("Origin")
 		c.Next()
 	}
+}
+
+func AuthMiddleware(c *gin.Context) {
+	fmt.Println("auth")
 }

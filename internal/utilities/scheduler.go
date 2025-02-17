@@ -5,12 +5,11 @@ import (
 	"os"
 	"strconv"
 	"tsunamiApi/internal/databases"
-	"tsunamiApi/internal/earthquake"
+	"tsunamiApi/internal/earthquakes"
 	"tsunamiApi/internal/websocket"
 	"tsunamiApi/models"
 
 	"github.com/go-co-op/gocron/v2"
-	"github.com/joho/godotenv"
 	"github.com/paulmach/orb"
 	"gorm.io/gorm/clause"
 )
@@ -32,7 +31,7 @@ func CreateScheduler(
 		),
 		gocron.NewTask(func() {
 			Task()
-			ws.SetBroadcast(earthquake.GetRecentEarthquakes())
+			ws.SetBroadcast(earthquakes.GetRecentEarthquakes())
 		}),
 	)
 	if err != nil {
@@ -43,7 +42,6 @@ func CreateScheduler(
 }
 
 func Task() {
-	godotenv.Load(".env")
 	isDev, _ := strconv.ParseBool(os.Getenv("DEV"))
 	columns := []string{
 		"latitude",
@@ -54,6 +52,7 @@ func Task() {
 		"title",
 		"description",
 		"feed_provider",
+		"updated_at",
 	}
 	tmd := make(chan []models.Earthquake)
 	gfz := make(chan []models.Earthquake)
@@ -76,7 +75,7 @@ func Task() {
 	close(gfz)
 	close(usgs)
 
-	coordinates := earthquake.GetGeometryOfAndaman()
+	coordinates := earthquakes.GetGeometryOfAndaman()
 	rs = Filter(rs, func(item models.Earthquake, idx int) bool {
 		p := orb.Point{item.Longitude, item.Latitude}
 		bound := coordinates.Bound()

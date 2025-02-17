@@ -1,4 +1,4 @@
-package earthquake
+package earthquakes
 
 import (
 	"encoding/json"
@@ -8,12 +8,10 @@ import (
 	"tsunamiApi/internal/databases"
 	"tsunamiApi/models"
 
-	"github.com/joho/godotenv"
 	"github.com/paulmach/orb"
 )
 
 func GetRecentEarthquakes() []byte {
-	godotenv.Load(".env")
 	isDev, _ := strconv.ParseBool(os.Getenv("DEV"))
 	earthquakes := &[]models.Earthquake{}
 

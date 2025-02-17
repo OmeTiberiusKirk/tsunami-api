@@ -17,7 +17,7 @@ func ReadTmd(c chan []models.Earthquake) {
 	} else {
 		var events []models.Earthquake
 		for _, v := range items {
-			events = append(events, v.ModifyPropsTypeOfFeedItem())
+			events = append(events, v.ModifyPropTypesOfFeedItem())
 		}
 		c <- events
 	}
@@ -34,7 +34,7 @@ func ReadGfz(c chan []models.Earthquake) {
 	} else {
 		var events []models.Earthquake
 		for _, v := range items {
-			events = append(events, v.ModifyPropsTypeOfFeedItem())
+			events = append(events, v.ModifyPropTypesOfFeedItem())
 		}
 		c <- events
 	}
@@ -55,7 +55,7 @@ func ReadUsgs(c chan []models.Earthquake) {
 
 	var events []models.Earthquake
 	for _, v := range dat.Features {
-		events = append(events, v.ModifyPropsTypeOfFeedItem())
+		events = append(events, v.ModifyPropTypesOfFeedItem())
 	}
 
 	c <- events

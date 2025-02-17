@@ -32,7 +32,7 @@ func ConvertXmlToJson[Item comparable](d string) ([]Item, error) {
 	return res.Rss.Channel.Item, nil
 }
 
-func (p TmdFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
+func (p TmdFeedItemPropsType) ModifyPropTypesOfFeedItem() models.Earthquake {
 	uid := regexp.MustCompile("earthquake=").Split(p.Link, 2)[1]
 	lat, _ := strconv.ParseFloat(p.Lat, 64)
 	long, _ := strconv.ParseFloat(p.Long, 64)
@@ -40,7 +40,7 @@ func (p TmdFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
 	depth, _ := strconv.ParseFloat(p.Depth, 64)
 	t := regexp.MustCompile(`\s+UTC`).ReplaceAllString(p.Time, "Z")
 	t = regexp.MustCompile(`\s+`).ReplaceAllString(t, "T")
-	Time, _ := time.Parse(time.RFC3339, t)
+	timeOfEvent, _ := time.Parse(time.RFC3339, t)
 
 	return models.Earthquake{
 		UID:          uid,
@@ -48,14 +48,15 @@ func (p TmdFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
 		Longitude:    long,
 		Magnitude:    mag,
 		Depth:        depth,
-		Time:         Time,
+		Time:         timeOfEvent,
 		Title:        p.Title,
 		Description:  p.Description,
 		FeedProvider: "tmd",
+		UpdatedAt:    time.Now(),
 	}
 }
 
-func (p GfzFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
+func (p GfzFeedItemPropsType) ModifyPropTypesOfFeedItem() models.Earthquake {
 	reg := regexp.MustCompile(`\s+`)
 	title := reg.Split(p.Title, -1)
 	desc := reg.Split(p.Description, -1)
@@ -63,27 +64,28 @@ func (p GfzFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
 	long, _ := strconv.ParseFloat(desc[3], 64)
 	mag, _ := strconv.ParseFloat(title[1][:len(title[1])-1], 64)
 	depth, _ := strconv.ParseFloat(desc[4], 64)
-	Time, _ := time.Parse(time.RFC3339, desc[0]+"T"+desc[1]+"Z")
+	timeOfEvent, _ := time.Parse(time.RFC3339, desc[0]+"T"+desc[1]+"Z")
 	return models.Earthquake{
 		UID:          p.Guid.Content,
 		Latitude:     lat,
 		Longitude:    long,
 		Magnitude:    mag,
 		Depth:        depth,
-		Time:         Time,
+		Time:         timeOfEvent,
 		Title:        p.Title,
 		Description:  p.Description,
 		FeedProvider: "gfz",
+		UpdatedAt:    time.Now(),
 	}
 }
 
-func (p UsgsFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
+func (p UsgsFeedItemPropsType) ModifyPropTypesOfFeedItem() models.Earthquake {
 	lat := p.Geometry.Coordinates[1]
 	long := p.Geometry.Coordinates[0]
 	title := p.Properties.Title
 	mag := p.Properties.Mag
 	depth := p.Geometry.Coordinates[2]
-	time := time.UnixMilli(p.Properties.Time).UTC()
+	timeOfEvent := time.UnixMilli(p.Properties.Time).UTC()
 	desc := p.Properties.Place
 	return models.Earthquake{
 		UID:          p.ID,
@@ -91,10 +93,11 @@ func (p UsgsFeedItemPropsType) ModifyPropsTypeOfFeedItem() models.Earthquake {
 		Longitude:    long,
 		Magnitude:    mag,
 		Depth:        depth,
-		Time:         time,
+		Time:         timeOfEvent,
 		Title:        title,
 		Description:  desc,
 		FeedProvider: "usgs",
+		UpdatedAt:    time.Now(),
 	}
 }
 

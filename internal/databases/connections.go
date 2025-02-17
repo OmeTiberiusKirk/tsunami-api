@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/joho/godotenv"
 	"gorm.io/driver/mysql"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -14,9 +13,7 @@ var PGDB *gorm.DB
 var MRDB *gorm.DB
 
 func ConnectPGDB() {
-	godotenv.Load(".env")
 	var err error
-
 	dsn := fmt.Sprintf(
 		`host=%s user=%s 
 		password=%s dbname=%s port=%s
@@ -37,7 +34,6 @@ func ConnectPGDB() {
 
 func ConnectMRDB() {
 	var err error
-	godotenv.Load(".env")
 	dsn := fmt.Sprintf(
 		"%v:%v@tcp(%v:3306)/%v?charset=utf8mb4&parseTime=True&loc=Local",
 		os.Getenv("MR_DB_USER"),

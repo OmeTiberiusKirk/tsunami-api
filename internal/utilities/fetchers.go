@@ -19,7 +19,7 @@ func FetchTmd(c chan []models.Earthquake) {
 	} else {
 		var events []models.Earthquake
 		for _, v := range items {
-			events = append(events, v.ModifyPropsTypeOfFeedItem())
+			events = append(events, v.ModifyPropTypesOfFeedItem())
 		}
 		c <- events
 	}
@@ -37,7 +37,7 @@ func FetchGfz(c chan []models.Earthquake) {
 	} else {
 		var events []models.Earthquake
 		for _, v := range items {
-			events = append(events, v.ModifyPropsTypeOfFeedItem())
+			events = append(events, v.ModifyPropTypesOfFeedItem())
 		}
 		c <- events
 	}
@@ -61,7 +61,7 @@ func FetchUsgs(c chan []models.Earthquake) {
 
 	var events []models.Earthquake
 	for _, v := range dat.Features {
-		events = append(events, v.ModifyPropsTypeOfFeedItem())
+		events = append(events, v.ModifyPropTypesOfFeedItem())
 	}
 
 	c <- events

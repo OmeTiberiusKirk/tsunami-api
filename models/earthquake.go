@@ -19,5 +19,8 @@ type Earthquake struct {
 	FeedProvider string         `json:"feed_from"`
 	CreatedAt    time.Time      `json:"created_date"`
 	UpdatedAt    time.Time      `json:"updated_at"`
-	DeletedAt    gorm.DeletedAt `gorm:"index" json:"deletedAt"`
+	DeletedAt    gorm.DeletedAt `gorm:"index" json:"deleted_at"`
+}
+
+type User struct {
 }
